@@ -1,0 +1,30 @@
+# Dữ liệu cá nhân/gia đình thật — KHÔNG BAO GIỜ đưa lên GitHub (kể cả private repo)
+data/
+
+# Ghi chú riêng tư của Andy (nhắc tới dự án SORA) — đồng bộ qua OneDrive/Google Drive
+# cá nhân, không qua git
+PROJECT_STATE.md
+CHANGELOG.md
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Tài liệu giáo trình George Brown College — không cần đưa lên repo
+AASD 4016 Full_Stack_Data_Science_Systems.pdf
+AASD 4017, Final Project.pdf
+Module1_Scripting_Notebooks.pdf
+Module3_Clients.pdf
+Module4_Docker.pdf
+Module5_Deployment.pdf
+Module6_ML_Canvas.pdf
+PDSDS - Lec1-2.pdf
+PDSDS - Lec3.pdf
+PDSDS - Lec4.pdf
+PDSDS - Lec5.pdf
