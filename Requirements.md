@@ -1,213 +1,258 @@
-Ý tưởng: để tôi viết lại nhu cầu thực tế của tôi và có thể là của thị trường. email ngày nay ai cũng có gần như ít nhất cũng như hộp thư mail box trong gia đình. đây là kênh thông tin cực kỳ quan trọng.  từ chính phủ, từ công ty business, từ nơi làm việc work, từ school, từ các thành viên trong gia đình...email cũng giống như nộp mail đầy thư rác., quảng cáo, spam ...lẫn lộn làm cho đôi khi bị  mất đị thông tin quan trọng cần kiềm soát. trong mail thực tế thì con người phải trực tiếp phân loại và đôi khi phải mở thư ra đọc từng file sau  s9ó dùng giấy bút gi chép lại phân loại ghi chú ngày giờ , cột nội dung, côt số tiền, cột dead line hya các thông tin cần khác...với người có email thì cũng tương tự chọn lựa thư thật trong đống thư rác, mở thư đọc và tổng hợp ghi chú bẳng excel và file mềm thì lưu vào ổ cứng cò thư paper thì phải cho vào box file lưu...vấn nạn là không có ai remin tốn thời gina, quên nhiều khi bị đóng phí...ví dụ thư đòi tiến mosrgate, thư insurance , thư từ tax chính phủ,...thư từ trường mời phụ huynh học...đa dạng nhưng chung quy thông tin đầu ra cũng chỉ là người gửi, có liên quan tài chính khg? có liên quan dead line, có yêu cầu gì đặv biệt...vậy tì nhu cầu rất lớn. hãy cùng nghiên cứu và phân tích thật thị trường theo đúng bài dạy của thầy. 
-
-
-
-
-REQUIREMENTS CHO ĐỀ TÀI “EMAIL EXTRACTOR AI SYSTEM”
-(Dùng cho cả AASD 4016 và AASD 4017)
-⭐ PHẦN 1 — REQUIREMENTS CHO MÔN AASD 4016
-Full Stack Data Science Systems
-(Có trích dẫn từ tài liệu em gửi)
-
-Theo tài liệu môn học, sinh viên phải:
-
-“Develop and manage a seamless end-to-end AI system.”
-“Deploy a fully trained and optimised model in a cloud environment.”
-“Connect an API to a deployed model to offer it as a data service.”
-
-Dựa trên đó, đề tài Email Extractor AI System phải đáp ứng các yêu cầu kỹ thuật sau:
-
-⭐ 1. AI Model Requirement (Deep Learning)
-Train một mô hình NER (Named Entity Recognition) hoặc Transformer mini để trích:
-
-MONEY (số tiền)
-
-DUE DATE (ngày hết hạn)
-
-SUBSCRIPTION NAME (tên dịch vụ)
-
-Dataset: email mẫu (tự tạo hoặc thu thập)
-
-Output: JSON chứa các entity đã trích xuất
-
-Mô hình đề xuất:
-BiLSTM + CRF  
-hoặc
-
-DistilBERT Token Classification
-
-→ Đáp ứng yêu cầu “model building, model tuning, model optimisation”.
-
-⭐ 2. Full Stack Requirement
-Backend:
-FastAPI hoặc Flask
-
-Endpoint /extract nhận email text hoặc file .eml
-
-Trả về JSON chứa các entity đã trích
-
-Database:
-SQLite (cho môn học) hoặc PostgreSQL (nếu muốn nâng cấp)
-
-Lưu:
-
-email content
-
-extracted money
-
-extracted due date
-
-subscription name
-
-timestamp
-
-Frontend:
-Dashboard đơn giản (HTML/JS hoặc Streamlit)
-
-Hiển thị:
-
-email
-
-kết quả extract
-
-biểu đồ thống kê (chi phí theo tháng)
-
-→ Đáp ứng yêu cầu “Communicate insights through dashboards”.
-
-⭐ 3. Deployment Requirement
-Deploy API lên cloud:
-
-Render / Railway / Azure
-
-Kết nối dashboard → API cloud
-
-Demo live
-
-→ Đáp ứng yêu cầu “Deploy a fully trained model in a cloud environment”.
-
-⭐ 4. Integration Requirement
-API phải được kết nối với model đã deploy
-
-Dashboard phải gọi API để lấy dữ liệu
-
-→ Đáp ứng yêu cầu “Connect visualisation tools to deployed models”.
-
-⭐ PHẦN 2 — REQUIREMENTS CHO MÔN AASD 4017
-Presenting Data Science-driven Solutions
-(Có trích dẫn từ tài liệu em gửi)
-
-Theo tài liệu môn học:
-
-“Your group will build a business case around a data-driven solution.”
-“Convince internal stakeholders to invest in your proposed solution.”
-
-Dựa trên đó, đề tài Email Extractor phải đáp ứng các yêu cầu business sau:
-
-⭐ 1. Executive Summary
-Giới thiệu Email Extractor AI System
-
-Vấn đề doanh nghiệp: quá tải email billing, missed payments, late fees
-
-Giải pháp: AI tự động đọc email và trích money + due date
-
-⭐ 2. Assumptions & Context
-Công ty giả định: SaaS subscription management company
-
-Vấn đề: khách hàng bị mất tiền vì không theo dõi billing email
-
-Cơ hội: tự động hóa bằng AI
-
-⭐ 3. Problem Statement
-Email billing quá nhiều → con người không thể đọc hết
-
-Missed due dates → bị trừ tiền
-
-Không có hệ thống tổng hợp billing
-
-⭐ 4. Market Analysis
-So sánh với:
-
-Mint
-
-Truebill
-
-Gmail AI labeling
-
-Điểm khác biệt: trích entity bằng Deep Learning, không chỉ đọc email
-
-⭐ 5. Proposed Solution
-AI đọc email
-
-Trích số tiền + ngày hết hạn
-
-Lưu vào dashboard
-
-Nhắc hạn trước khi bị trừ tiền
-
-⭐ 6. Build vs Buy
-Buy: không có sản phẩm nào trích entity từ email bằng AI
-
-Build: chi phí thấp, công nghệ sẵn có
-
-⭐ 7. Financial Overview
-Chi phí:
-
-Dev team
-
-Cloud hosting
-
-Model training
-
-Revenue:
-
-Subscription fee
-
-Enterprise licensing
-
-ROI: giảm missed payments → tiết kiệm chi phí
-
-⭐ 8. Stakeholder Analysis
-CTO → quan tâm kỹ thuật
-
-CFO → quan tâm chi phí
-
-COO → quan tâm vận hành
-
-Customer → quan tâm tiện lợi
-
-⭐ 9. Risk Analysis
-Risk: email format đa dạng
-
-Mitigation: dùng transformer
-
-Risk: privacy
-
-Mitigation: encryption + local processing
-
-⭐ 10. Implementation Plan
-Week 1–2: dataset + labeling
-
-Week 3–4: train model
-
-Week 5: API
-
-Week 6: dashboard
-
-Week 7: deploy
-
-Week 8: presentation
-
-⭐ 11. Final Presentation Requirement
-10 phút
-
-Trình bày business case
-
-Demo live API + dashboard
-
-Nêu lợi ích tài chính
-
-⭐ KẾT LUẬN
-Van, đề tài Email Extractor AI System đáp ứng 100% yêu cầu của cả hai môn:
-
-✔ AASD 4016 → Full Stack AI + Model + API + Deploy
-✔ AASD 4017 → Business Case + Market + ROI + Risk + Presentation
+# Requirements Specification — Email Extractor AI System
+
+**Document Control**
+| Field | Value |
+|---|---|
+| Project | Email Extractor AI System |
+| Courses | AASD 4016 — Full Stack Data Science Systems (individual); AASD 4017 — Presenting Data Science-driven Solutions (group) |
+| Institution | George Brown College, Applied A.I. Solutions Development |
+| Author / Project Lead | Andy Phan |
+| Status | Draft v1.0 |
+| Date | 2026-08-03 |
+
+---
+
+## 1. Introduction
+
+### 1.1 Purpose
+This document specifies the functional, data, and non-functional requirements for the
+Email Extractor AI System, a full-stack AI application that reads incoming email,
+classifies its relevance, and extracts structured information (sender, financial
+amount, due date, and special requests) to help a user track important obligations
+that would otherwise be lost among spam and routine correspondence.
+
+### 1.2 Scope
+The system covers the design, training, deployment, and business justification of a
+single-channel (email) information extraction pipeline. It is built as a standalone
+academic project — independent codebase, infrastructure, and dataset — and does not
+integrate with, read from, or depend on any pre-existing production system. Any
+architectural pattern referenced from prior systems is used for design inspiration
+only, not for code or data reuse.
+
+### 1.3 Definitions & Acronyms
+| Term | Definition |
+|---|---|
+| NER | Named Entity Recognition — token-level extraction of structured spans (e.g., MONEY, DATE) from free text |
+| Domain | The life/business area an email belongs to (e.g., Finance, Education) |
+| Event type | The downstream action category an item should become (finance obligation, calendar schedule, or note) |
+| Confidence gate | A threshold-based policy that decides whether the system auto-applies, asks the user to confirm, or defers an extraction |
+| Synthetic data | Training examples generated by an LLM rather than collected from real personal records |
+
+### 1.4 References
+- AASD 4016 — Full Stack Data Science Systems, Course Outline (George Brown College)
+- AASD 4017 — Presenting Data Science-driven Solutions, Final Project brief (George Brown College)
+- AASD 4016 Modules 1, 3, 4, 5, 6 (Scripting Notebooks, Clients, Docker, Deployment, ML Canvas)
+- AASD 4017 Lectures 1–5 (Business Case, KPIs, Business Techniques, Storytelling & Pitch)
+
+---
+
+## 2. Overall Description
+
+### 2.1 Background & Motivation
+Households and individuals receive a high volume of important email — government
+notices, bank and mortgage statements, insurance renewals, tax receipts, school
+correspondence, subscription billing — interspersed with spam and low-value
+messages. Today this requires manual triage: opening each message, judging its
+importance, and separately recording sender, amount, and deadline (on paper or in a
+spreadsheet). Failure to do so reliably results in missed payments, late fees, and
+missed deadlines. Regardless of source, the information a user actually needs
+reduces to four questions: **who sent it, is it financially relevant, is there a
+deadline, and is there a special action required.**
+
+### 2.2 Product Perspective
+The system is a new, self-contained product: a Flask-based API backed by a
+fine-tuned NLP model, containerized with Docker, and deployed to a cloud VM. It
+consumes raw email text as input and produces structured, actionable records as
+output, surfaced through a lightweight dashboard.
+
+### 2.3 User Classes
+| User class | Description |
+|---|---|
+| End user | An individual or family managing personal/business email volume |
+| Reviewer (human-in-the-loop) | The end user acting on low-confidence extractions the system defers to them |
+| Course evaluator | AASD 4016/4017 instructor(s) assessing technical and business deliverables |
+
+### 2.4 Operating Environment
+- Backend: Python 3.11, Flask
+- Model training: HuggingFace `transformers` (token classification)
+- Containerization: Docker
+- Deployment target: Google Cloud Platform, Compute Engine VM
+- Version control: Git / GitHub (private repository)
+
+### 2.5 Assumptions & Dependencies
+- The business context is assumed to be a SaaS-style subscription/billing
+  management company, per AASD 4017's assumption requirement.
+- Generative AI tools may be used for development per AASD 4016's Generative AI
+  Usage Guidelines; an AI Usage Declaration form is submitted with the assignment.
+- No comparable public dataset exists that natively matches this task's schema
+  (see §5.2); training data is therefore predominantly synthetic.
+
+### 2.6 Constraints
+- AASD 4016 is an **individually graded** assignment; AASD 4017 is a **group**
+  assignment (4–8 members, one Project Lead).
+- Delivery window: 3 weeks (AASD 4016, per course schedule).
+- No real personal or family data (PII) may be used in the training set,
+  repository, or submitted deliverables.
+
+---
+
+## 3. System Architecture — Multi-Stage Classification Pipeline
+
+The problem is **not** a single classification task. It is decomposed into six
+stages, only two of which require trained deep learning models; the rest are
+metadata reads or deterministic rules.
+
+| Stage | Task | Problem type | Model required? |
+|---|---|---|---|
+| 1 | Spam / trash filtering | Binary (gate) | No — reuse Gmail API `labelIds` |
+| 2 | Attachment / metadata detection | Metadata read | No |
+| 3 | **Domain classification** | Multi-class (7 domains + fallback "Notes") | **Yes — primary DL component** |
+| 3b | Personal vs. Business Finance | Binary | No — rule/registry lookup |
+| 4 | Event type (finance_obligation / schedule / note) | Multi-class (derived) | No — rule over Stage 5 output |
+| 5 | **Entity extraction**: amount, due date, sender/vendor | Sequence labeling (NER) | **Yes — primary DL component** |
+| 6 | Confidence-gated action policy | Threshold policy | No — fixed thresholds (§4, FR-08) |
+
+Domain taxonomy (Stage 3): Finance, Administration, Education, Work & Business,
+Home & Family, Health, Personal Growth, plus a "Notes" fallback bucket for
+low-confidence or unclassifiable items.
+
+---
+
+## 4. Functional Requirements
+
+| ID | Requirement |
+|---|---|
+| FR-01 | The system SHALL accept raw email text (and optionally sender/subject metadata) as input. |
+| FR-02 | The system SHALL filter spam/trash using existing email-provider metadata before further processing. |
+| FR-03 | The system SHALL classify each retained email into exactly one of 7 domains, or a "Notes" fallback when confidence is insufficient. |
+| FR-04 | The system SHALL determine whether a Finance-domain item is Personal or Business using a configurable sender/keyword registry. |
+| FR-05 | The system SHALL extract, where present, the monetary amount, due date, and sender/vendor name from the email body using a fine-tuned NER model. |
+| FR-06 | The system SHALL derive the event type (finance_obligation, schedule, or note) from the presence/absence of extracted amount and due-date entities, not from a separately trained classifier. |
+| FR-07 | The system SHALL expose extraction results via a REST API endpoint. |
+| FR-08 | The system SHALL apply a confidence-gated policy: auto-apply when confidence ≥ 0.85, request user confirmation when 0.65 ≤ confidence < 0.85, and defer to Notes for manual review when confidence < 0.65. |
+| FR-09 | The system SHALL present results and summary statistics through a dashboard (expense-by-month chart, extracted entity table). |
+| FR-10 | The system SHALL allow a human reviewer to correct or confirm low-confidence extractions. |
+
+---
+
+## 5. Data Requirements
+
+### 5.1 Extraction Schema
+```json
+{
+  "doc_type": "string",
+  "issuer": "string",
+  "recipient_name": "string (synthetic only)",
+  "issue_date": "YYYY-MM-DD",
+  "due_date": "YYYY-MM-DD | null",
+  "amounts": [{"type": "string", "value": 0.00, "currency": "CAD"}],
+  "reference_number": "string (masked)",
+  "special_note": "string (free text)",
+  "domain": "Finance | Administration | Education | Work & Business | Home & Family | Health | Personal Growth | Notes",
+  "sub_domain": "string",
+  "event_type": "finance_obligation | schedule | note"
+}
+```
+
+### 5.2 Data Sources
+| Source | Role | Status |
+|---|---|---|
+| Synthetic data (LLM-generated) | Primary training/eval set | To be generated |
+| `invoice-extraction-dataset-v2` (HuggingFace) | Reference format only — content quality assessed as unreliable (incoherent vendor/item pairing) | Reviewed, not used as content source |
+| Enron email corpus (`emails.csv`) | Negative-class examples (non-financial, non-deadline email), after keyword filtering | Downloaded, not yet filtered |
+| CommonForms (HuggingFace) | Structural reference for Administration-domain documents | Identified, not yet used |
+
+### 5.3 Domain Coverage Priority
+High: Finance, Administration, Education, Work & Business.
+Low (negative-class weighting): Home & Family, Personal Growth.
+Minimal: Health.
+
+### 5.4 Dataset Documentation & Provenance
+Each dataset record SHALL carry a provenance tag (`synthetic_llm` |
+`real_redacted_template` | `public_dataset`), and the dataset SHALL be accompanied
+by a `DATASET_CARD.md` following the Datasheets-for-Datasets framework (motivation,
+composition, collection process, known limitations, intended/unintended use,
+privacy statement).
+
+### 5.5 Privacy Constraint
+No real personal, family, or business PII (SIN, bank account numbers, real names,
+real addresses, real credit data) SHALL appear in the dataset, repository, or any
+submitted deliverable. Any real document used for structural reference SHALL be
+fully redacted (text-layer removal, not visual overlay) before being referenced.
+
+---
+
+## 6. Non-Functional Requirements
+
+| ID | Requirement |
+|---|---|
+| NFR-01 | The trained NER component SHALL be evaluated with standard precision/recall/F1 per entity type. |
+| NFR-02 | The application SHALL be containerized with Docker and deployed to a GCP Compute Engine VM. |
+| NFR-03 | The train/validation/test split SHALL be 70/15/15, stratified by domain. |
+| NFR-04 | The repository SHALL exclude all real personal data via `.gitignore`; private working notes SHALL be synced through a personal cloud channel outside of Git. |
+| NFR-05 | Generative AI usage SHALL be disclosed via the AI Usage Declaration form (AASD 4016 requirement). |
+
+---
+
+## 7. Course Deliverables Mapping
+
+### 7.1 AASD 4016 — Full Stack Data Science Systems (individual)
+- Model building/tuning: fine-tuned multilingual DistilBERT for NER (Stage 5) +
+  domain classifier (Stage 3), with at least one documented tuning/comparison
+  experiment.
+- Full stack: Flask API (`/extract`), SQLite storage, lightweight dashboard.
+- Deployment: Docker image on GCP Compute Engine, live demo.
+- Integration: dashboard consumes the deployed API.
+
+### 7.2 AASD 4017 — Presenting Data Science-driven Solutions (group)
+- Business case authored using the **Five Cases Model** (Strategic, Economic,
+  Commercial, Financial, Management), per course lecture material.
+- Deliverables: Business Case document (.docx), presentation slides (.pptx/PDF),
+  10-minute pitch.
+- Market comparison: Mint, Truebill/Rocket Money, Gmail smart labels — this
+  system's differentiator is structured, multi-domain deep-learning extraction
+  (not finance-only rule matching).
+
+---
+
+## 8. Team & Collaboration Model
+- Shared, sanitized repository: `https://github.com/vietsharescom/Email_Extractor.git`
+  (private; collaborator granted Write access; branch protection on `main`).
+- Task allocation: external dataset search, containerization/deployment, and
+  business-case sections (Market Analysis, Financial Overview, Risk Analysis,
+  slides) may be delegated to the collaborator; core schema/model design and
+  problem framing remain with the Project Lead.
+- Private planning artifacts (`PROJECT_STATE.md`, `CHANGELOG.md`) are excluded
+  from the shared repository and synced via personal cloud storage for
+  cross-device continuity.
+
+---
+
+## 9. Risks & Open Items
+| Risk | Mitigation |
+|---|---|
+| Synthetic-only training data may not generalize to real-world email formatting | Use Enron corpus for structural/negative-example diversity; document limitation in DATASET_CARD.md |
+| No reliable public dataset for Insurance/Immigration sub-domains | Rely primarily on synthetic generation for these sub-domains; flag as a known coverage gap |
+| 3-week timeline constrains scope | Only Stage 3 (domain) and Stage 5 (NER) are trained models; all other stages are rule-based by design (§3) |
+
+---
+
+## 10. Out of Scope
+- Integration with any pre-existing production system or real user email account.
+- Voice, image, or social-media input channels (email only).
+- Automated subscription cancellation or financial transactions.
+- Health-domain extraction (excluded due to lack of representative data).
+
+---
+
+## Appendix A — Original Problem Statement (as written by the Project Lead)
+> *"Email today is the household mailbox for nearly everyone — the channel for
+> government notices, business correspondence, work, school, and family. Like a
+> physical mailbox, it fills with spam and promotions, and important information
+> gets buried. People must manually open, read, and record what matters — sender,
+> amount, deadline — on paper or in spreadsheets. There is no reminder system, it
+> is time-consuming, and things get missed: mortgage payment notices, insurance
+> letters, government tax letters, school meeting invitations. Regardless of
+> source, the information that ultimately matters is always the same: who sent
+> it, is it financially relevant, is there a deadline, is there a special
+> request."*
