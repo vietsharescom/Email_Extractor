@@ -1,0 +1,24 @@
+{
+  "id": "syn_home_utilities_0001",
+  "domain": "Home & Family",
+  "sub_domain": "utilities",
+  "event_type": "finance_obligation",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Electricity utility bill (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Alectra Utilities <billing@alectrautilities.com>\nSubject: Your electricity bill is ready - $164.32 due\n\nHello,\n\nYour latest electricity bill of $164.32 is now available. Payment is due by March 5, 2026.\n\nView your bill online or set up pre-authorized payment.\n\nAlectra Utilities",
+  "output": {
+    "doc_type": "utility_bill",
+    "issuer": "Alectra Utilities",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-02-18",
+    "due_date": "2026-03-05",
+    "amounts": [{"type": "payment_due", "value": 164.32, "currency": "CAD"}],
+    "reference_number": null,
+    "special_note": null,
+    "domain": "Home & Family"
+  }
+}

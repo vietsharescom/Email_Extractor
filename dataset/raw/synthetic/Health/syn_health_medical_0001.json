@@ -1,0 +1,24 @@
+{
+  "id": "syn_health_medical_0001",
+  "domain": "Health",
+  "sub_domain": "medical",
+  "event_type": "schedule",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Dental/medical clinic appointment reminder (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Bright Smile Dental Clinic <reminders@brightsmiledental.ca>\nSubject: Appointment Reminder - March 20, 2026\n\nHi,\n\nThis is a reminder of your upcoming dental appointment on March 20, 2026 at 10:30 AM with Dr. Patel.\n\nPlease arrive 10 minutes early. Call us if you need to reschedule.\n\nBright Smile Dental Clinic",
+  "output": {
+    "doc_type": "appointment_reminder",
+    "issuer": "Bright Smile Dental Clinic",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-03-13",
+    "due_date": "2026-03-20",
+    "amounts": [],
+    "reference_number": null,
+    "special_note": "Appointment at 10:30 AM with Dr. Patel; arrive 10 minutes early.",
+    "domain": "Health"
+  }
+}

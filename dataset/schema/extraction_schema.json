@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Email Extractor AI — Training Record Schema",
+  "description": "One record = one synthetic or reference email/document example, with provenance and extraction target.",
+  "type": "object",
+  "required": ["id", "domain", "sub_domain", "event_type", "source_type", "created_date", "input", "output"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Format: {source_type_prefix}_{domain}_{subdomain}_{index:04d}, e.g. syn_finance_tax_0001"
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["Finance", "Administration", "Education", "Work & Business", "Home & Family", "Health", "Personal Growth", "Notes"]
+    },
+    "sub_domain": {
+      "type": "string",
+      "description": "Free-text, more granular than domain, e.g. tax, banking, insurance, immigration, school"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": ["finance_obligation", "schedule", "note"],
+      "description": "Derived from presence of amount/due_date in output, not independently labeled (Requirements.md FR-06)"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["synthetic_llm", "real_redacted_template", "public_dataset"]
+    },
+    "based_on_template": {
+      "type": ["string", "null"],
+      "description": "Name of the real document type this row's structure was inspired by, if any (e.g. 'CRA Notice of Assessment') — structure only, never real content"
+    },
+    "generated_by": {
+      "type": ["string", "null"],
+      "description": "Model that generated this row, required when source_type = synthetic_llm"
+    },
+    "prompt_version": {
+      "type": ["string", "null"]
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "split": {
+      "type": ["string", "null"],
+      "enum": ["train", "val", "test", null]
+    },
+    "input": {
+      "type": "string",
+      "description": "Raw email/document text (synthetic or reference)"
+    },
+    "output": {
+      "type": "object",
+      "description": "Extraction target — see Requirements.md §5.1",
+      "required": ["doc_type", "issuer", "domain"],
+      "properties": {
+        "doc_type": { "type": "string" },
+        "issuer": { "type": "string" },
+        "recipient_name": { "type": "string", "description": "Synthetic only — never a real name" },
+        "issue_date": { "type": ["string", "null"], "format": "date" },
+        "due_date": { "type": ["string", "null"], "format": "date" },
+        "amounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string" },
+              "value": { "type": "number" },
+              "currency": { "type": "string", "default": "CAD" }
+            }
+          }
+        },
+        "reference_number": { "type": ["string", "null"], "description": "Masked, e.g. ***1234" },
+        "special_note": { "type": ["string", "null"] },
+        "domain": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "syn_finance_banking_0002",
+  "domain": "Finance",
+  "sub_domain": "banking",
+  "event_type": "note",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Interac e-Transfer notification (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Interac e-Transfer <notify@payments.interac.ca>\nSubject: You've received $150.00 from Maria Chen\n\nHi,\n\nMaria Chen has sent you an Interac e-Transfer for $150.00. Deposit was made automatically to your account ending in 4321.\n\nNo action needed.\n\nInterac",
+  "output": {
+    "doc_type": "e_transfer_notification",
+    "issuer": "Interac",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-03-02",
+    "due_date": null,
+    "amounts": [{"type": "received", "value": 150.00, "currency": "CAD"}],
+    "reference_number": null,
+    "special_note": "Informational only - incoming funds, no obligation on recipient.",
+    "domain": "Finance"
+  }
+}

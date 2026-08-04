@@ -12,6 +12,11 @@ __pycache__/
 *.pyc
 .env
 
+# Gmail OAuth secrets — NEVER commit (personal mailbox access)
+credentials.json
+token.json
+inbox_audit_output/
+
 # OS / editor
 .DS_Store
 Thumbs.db

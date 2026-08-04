@@ -1,0 +1,27 @@
+{
+  "id": "syn_finance_banking_0001",
+  "domain": "Finance",
+  "sub_domain": "credit_card",
+  "event_type": "finance_obligation",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Credit card payment due alert (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: CIBC Card Services <alerts@cibc.com>\nSubject: Your payment of $312.44 is due soon\n\nHi there,\n\nYour CIBC Visa card payment of $312.44 is due on March 18, 2026. Minimum payment: $35.00.\n\nLog in to CIBC Online Banking to make a payment.\n\nCIBC",
+  "output": {
+    "doc_type": "credit_card_payment_alert",
+    "issuer": "CIBC",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-03-08",
+    "due_date": "2026-03-18",
+    "amounts": [
+      {"type": "payment_due", "value": 312.44, "currency": "CAD"},
+      {"type": "minimum_payment", "value": 35.00, "currency": "CAD"}
+    ],
+    "reference_number": null,
+    "special_note": null,
+    "domain": "Finance"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "syn_edu_school_0002",
+  "domain": "Education",
+  "sub_domain": "school",
+  "event_type": "finance_obligation",
+  "source_type": "synthetic_llm",
+  "based_on_template": "College tuition payment reminder (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: George Brown College Student Accounts <studentaccounts@georgebrown.ca>\nSubject: Tuition Payment Reminder - Winter 2026\n\nDear Student,\n\nThis is a reminder that your tuition balance of $2,340.00 for the Winter 2026 term is due by January 15, 2026. Late payments may be subject to a hold on your account.\n\nGeorge Brown College",
+  "output": {
+    "doc_type": "tuition_invoice",
+    "issuer": "George Brown College",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2025-12-20",
+    "due_date": "2026-01-15",
+    "amounts": [{"type": "tuition_due", "value": 2340.00, "currency": "CAD"}],
+    "reference_number": null,
+    "special_note": "Late payment may result in a hold on student account.",
+    "domain": "Education"
+  }
+}

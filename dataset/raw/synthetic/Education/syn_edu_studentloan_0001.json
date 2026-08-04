@@ -1,0 +1,24 @@
+{
+  "id": "syn_edu_studentloan_0001",
+  "domain": "Education",
+  "sub_domain": "student_loan",
+  "event_type": "note",
+  "source_type": "synthetic_llm",
+  "based_on_template": "OSAP Confirmation of Enrolment / funding confirmation (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: OSAP <noreply@osap.gov.on.ca>\nSubject: Your OSAP funding has been confirmed\n\nHi,\n\nYour OSAP application for the 2025-2026 school year has been assessed and confirmed. Funding will be disbursed according to your school's schedule.\n\nNo further action is required at this time.\n\nOSAP",
+  "output": {
+    "doc_type": "osap_confirmation",
+    "issuer": "OSAP",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2025-09-01",
+    "due_date": null,
+    "amounts": [],
+    "reference_number": null,
+    "special_note": "Informational confirmation, no action or deadline for the recipient.",
+    "domain": "Education"
+  }
+}

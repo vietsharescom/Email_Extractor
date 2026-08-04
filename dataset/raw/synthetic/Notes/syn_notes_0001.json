@@ -1,0 +1,24 @@
+{
+  "id": "syn_notes_0001",
+  "domain": "Notes",
+  "sub_domain": "uncategorized",
+  "event_type": "note",
+  "source_type": "synthetic_llm",
+  "based_on_template": null,
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Local Community News <newsletter@communitylocal.ca>\nSubject: This Week in Your Neighbourhood\n\nHi neighbour,\n\nCheck out this week's local events, volunteer opportunities, and community updates. Read more on our website.\n\nLocal Community News",
+  "output": {
+    "doc_type": "newsletter",
+    "issuer": "Local Community News",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-03-06",
+    "due_date": null,
+    "amounts": [],
+    "reference_number": null,
+    "special_note": "Low relevance - no financial or deadline signal, routed to Notes fallback.",
+    "domain": "Notes"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "syn_work_payroll_0001",
+  "domain": "Work & Business",
+  "sub_domain": "payroll",
+  "event_type": "note",
+  "source_type": "synthetic_llm",
+  "based_on_template": "T4 slip availability notification (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Payroll Services <payroll@adp.ca>\nSubject: Your 2025 T4 slip is now available\n\nHello,\n\nYour T4 slip for the 2025 tax year is now available through the employee portal. Please download it for your tax filing.\n\nADP Payroll Services",
+  "output": {
+    "doc_type": "t4_slip_notification",
+    "issuer": "ADP Payroll Services",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-02-10",
+    "due_date": null,
+    "amounts": [],
+    "reference_number": null,
+    "special_note": "Informational - no amount stated in email, T4 document must be downloaded separately.",
+    "domain": "Work & Business"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "syn_admin_insurance_0001",
+  "domain": "Administration",
+  "sub_domain": "insurance",
+  "event_type": "finance_obligation",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Auto insurance renewal notice (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Aviva Canada <renewals@avivacanada.com>\nSubject: Your auto insurance policy renews soon - Action required\n\nDear Valued Customer,\n\nYour auto insurance policy #AUT-2244871 is set to renew on May 1, 2026. Your renewal premium is $1,180.00, due by April 24, 2026.\n\nPlease review your coverage and confirm before the renewal date.\n\nAviva Canada",
+  "output": {
+    "doc_type": "insurance_renewal_notice",
+    "issuer": "Aviva Canada",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-04-01",
+    "due_date": "2026-04-24",
+    "amounts": [{"type": "premium_due", "value": 1180.00, "currency": "CAD"}],
+    "reference_number": "***4871",
+    "special_note": "Policy renews automatically on May 1, 2026 unless changes are made.",
+    "domain": "Administration"
+  }
+}

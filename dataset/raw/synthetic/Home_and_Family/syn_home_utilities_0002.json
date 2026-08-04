@@ -1,0 +1,24 @@
+{
+  "id": "syn_home_utilities_0002",
+  "domain": "Home & Family",
+  "sub_domain": "utilities",
+  "event_type": "finance_obligation",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Internet/telecom bill (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Bell Canada <bill@bell.ca>\nSubject: Your Bell bill is ready\n\nHi,\n\nYour Bell bill of $98.75 for Internet and Home Phone is ready to view. Your payment is due on March 10, 2026.\n\nBell Canada",
+  "output": {
+    "doc_type": "utility_bill",
+    "issuer": "Bell Canada",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-02-22",
+    "due_date": "2026-03-10",
+    "amounts": [{"type": "payment_due", "value": 98.75, "currency": "CAD"}],
+    "reference_number": null,
+    "special_note": null,
+    "domain": "Home & Family"
+  }
+}

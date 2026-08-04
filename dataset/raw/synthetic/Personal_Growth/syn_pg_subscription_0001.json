@@ -1,0 +1,24 @@
+{
+  "id": "syn_pg_subscription_0001",
+  "domain": "Personal Growth",
+  "sub_domain": "subscription_personal",
+  "event_type": "note",
+  "source_type": "synthetic_llm",
+  "based_on_template": "Streaming service payment receipt (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Netflix <info@account.netflix.com>\nSubject: Your receipt for Netflix\n\nHi,\n\nThanks for being a Netflix member. We've charged $16.99 to your payment method on file for your monthly subscription.\n\nNo action needed.\n\nNetflix",
+  "output": {
+    "doc_type": "subscription_receipt",
+    "issuer": "Netflix",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-03-01",
+    "due_date": null,
+    "amounts": [{"type": "charged", "value": 16.99, "currency": "CAD"}],
+    "reference_number": null,
+    "special_note": "Already charged - informational receipt, not an outstanding obligation.",
+    "domain": "Personal Growth"
+  }
+}

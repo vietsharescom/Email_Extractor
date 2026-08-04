@@ -1,0 +1,24 @@
+{
+  "id": "syn_finance_tax_0001",
+  "domain": "Finance",
+  "sub_domain": "tax",
+  "event_type": "finance_obligation",
+  "source_type": "synthetic_llm",
+  "based_on_template": "CRA Notice of Assessment (structure only)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Canada Revenue Agency <noreply@cra-arc.gc.ca>\nSubject: Your 2025 Notice of Assessment is now available\n\nHello,\n\nYour 2025 Notice of Assessment is now available in your CRA My Account. Based on our assessment, you have a balance owing of $842.50, due by April 30, 2026.\n\nPlease log in to My Account to view the full notice and arrange payment.\n\nCanada Revenue Agency",
+  "output": {
+    "doc_type": "notice_of_assessment",
+    "issuer": "Canada Revenue Agency",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-03-15",
+    "due_date": "2026-04-30",
+    "amounts": [{"type": "balance_owing", "value": 842.50, "currency": "CAD"}],
+    "reference_number": null,
+    "special_note": "Balance owing must be paid by due date to avoid interest.",
+    "domain": "Finance"
+  }
+}

@@ -1,0 +1,115 @@
+id,domain,sub_domain,event_type,source_type,based_on_template,split,created_date
+syn_admin_civic_0001,Administration,civic,schedule,synthetic_llm,Municipal election voting notice (generic structure),val,2026-08-03
+syn_admin_civic_0002,Administration,civic,note,synthetic_llm,Jury duty summons notice (generic structure),train,2026-08-03
+syn_admin_civic_0003,Administration,civic,note,synthetic_llm,Voter registration confirmation (generic structure),train,2026-08-03
+syn_admin_civic_0004,Administration,civic,schedule,synthetic_llm,Community town hall meeting notice (generic structure),train,2026-08-03
+syn_admin_immigration_0001,Administration,immigration,note,synthetic_llm,IRCC secure account status update email (generic structure),test,2026-08-03
+syn_admin_immigration_0002,Administration,immigration,finance_obligation,synthetic_llm,IRCC fee payment request (generic structure),val,2026-08-03
+syn_admin_immigration_0003,Administration,immigration,schedule,synthetic_llm,Biometrics appointment notice (generic structure),test,2026-08-03
+syn_admin_immigration_0004,Administration,immigration,note,synthetic_llm,Citizenship application received confirmation (generic structure),train,2026-08-03
+syn_admin_immigration_0005,Administration,immigration,schedule,synthetic_llm,Citizenship test/ceremony invitation (generic structure),train,2026-08-03
+syn_admin_immigration_0006,Administration,immigration,note,synthetic_llm,Work permit approval notification (generic structure),train,2026-08-03
+syn_admin_insurance_0001,Administration,insurance,finance_obligation,synthetic_llm,Auto insurance renewal notice (generic structure),train,2026-08-03
+syn_admin_insurance_0002,Administration,insurance,finance_obligation,synthetic_llm,Home insurance renewal notice (generic structure),val,2026-08-03
+syn_admin_insurance_0003,Administration,insurance,note,synthetic_llm,Insurance claim status update (generic structure),test,2026-08-03
+syn_admin_insurance_0004,Administration,insurance,finance_obligation,synthetic_llm,Life insurance premium due notice (generic structure),train,2026-08-03
+syn_admin_insurance_0005,Administration,insurance,note,synthetic_llm,Auto insurance pink slip / proof of insurance email (generic structure),train,2026-08-03
+syn_admin_insurance_0006,Administration,insurance,finance_obligation,synthetic_llm,Insurance payment declined notice (generic structure),train,2026-08-03
+syn_admin_vehicledmv_0001,Administration,vehicle_dmv,finance_obligation,synthetic_llm,Driver's licence renewal notice (generic structure),train,2026-08-03
+syn_admin_vehicledmv_0002,Administration,vehicle_dmv,finance_obligation,synthetic_llm,Vehicle registration renewal notice (generic structure),train,2026-08-03
+syn_admin_vehicledmv_0003,Administration,vehicle_dmv,finance_obligation,synthetic_llm,Parking ticket notice (generic structure),train,2026-08-03
+syn_admin_vehicledmv_0004,Administration,vehicle_dmv,note,synthetic_llm,Vehicle recall notice (generic structure),train,2026-08-03
+syn_edu_kidschool_0001,Education,children_school,schedule,synthetic_llm,High school athletic banquet invite (generic structure),val,2026-08-03
+syn_edu_kidschool_0002,Education,children_school,finance_obligation,synthetic_llm,School field trip payment request (generic structure),train,2026-08-03
+syn_edu_kidschool_0003,Education,children_school,note,synthetic_llm,Report card availability notice (generic structure),test,2026-08-03
+syn_edu_kidschool_0004,Education,children_school,note,synthetic_llm,Automated school attendance call confirmation (generic structure),train,2026-08-03
+syn_edu_kidschool_0005,Education,children_school,finance_obligation,synthetic_llm,Summer camp registration/refund request (generic structure),test,2026-08-03
+syn_edu_school_0001,Education,school,schedule,synthetic_llm,School parent-teacher meeting invite (generic structure),train,2026-08-03
+syn_edu_school_0002,Education,school,finance_obligation,synthetic_llm,College tuition payment reminder (generic structure),train,2026-08-03
+syn_edu_school_0003,Education,school,note,synthetic_llm,College account/password change notification (generic structure),train,2026-08-03
+syn_edu_school_0004,Education,school,note,synthetic_llm,College orientation session invite (generic structure),train,2026-08-03
+syn_edu_school_0005,Education,school,schedule,synthetic_llm,College registration reminder (generic structure),train,2026-08-03
+syn_edu_school_0006,Education,school,finance_obligation,synthetic_llm,Late tuition fee warning (generic structure),test,2026-08-03
+syn_edu_school_0007,Education,school,note,synthetic_llm,AI capstone project match notification (generic structure),val,2026-08-03
+syn_edu_school_0008,Education,school,schedule,synthetic_llm,English proficiency test appointment (generic structure),train,2026-08-03
+syn_edu_school_0009,Education,school,finance_obligation,synthetic_llm,Deposit required to hold admission offer (generic structure),train,2026-08-03
+syn_edu_studentloan_0001,Education,student_loan,note,synthetic_llm,OSAP Confirmation of Enrolment / funding confirmation (generic structure),train,2026-08-03
+syn_edu_studentloan_0002,Education,student_loan,finance_obligation,synthetic_llm,Student loan repayment reminder (generic structure),train,2026-08-03
+syn_edu_studentloan_0003,Education,student_loan,note,synthetic_llm,OSAP enrolment confirmation request (generic structure),train,2026-08-03
+syn_edu_studentloan_0004,Education,student_loan,finance_obligation,synthetic_llm,"Student account statement, balance owing (structure only)",train,2026-08-03
+syn_edu_studentloan_0005,Education,student_loan,note,synthetic_llm,OSAP funding disbursed notification (generic structure),val,2026-08-03
+syn_edu_studentloan_0006,Education,student_loan,note,synthetic_llm,OSAP application status update (generic structure),train,2026-08-03
+syn_finance_banking_0001,Finance,credit_card,finance_obligation,synthetic_llm,Credit card payment due alert (generic structure),train,2026-08-03
+syn_finance_banking_0002,Finance,banking,note,synthetic_llm,Interac e-Transfer notification (generic structure),val,2026-08-03
+syn_finance_banking_0003,Finance,banking,note,synthetic_llm,Bank e-statement ready notification (generic structure),train,2026-08-03
+syn_finance_banking_0004,Finance,banking,note,synthetic_llm,Low balance alert (generic structure),train,2026-08-03
+syn_finance_banking_0005,Finance,banking,note,synthetic_llm,Interac e-Transfer sent confirmation (generic structure),val,2026-08-03
+syn_finance_banking_0006,Finance,banking,finance_obligation,synthetic_llm,GIC maturity notice (structure only),train,2026-08-03
+syn_finance_banking_0007,Finance,banking,finance_obligation,synthetic_llm,Overdraft notice (generic structure),train,2026-08-03
+syn_finance_banking_0008,Finance,banking,note,synthetic_llm,Direct deposit received notification (generic structure),train,2026-08-03
+syn_finance_creditcard_0002,Finance,credit_card,finance_obligation,synthetic_llm,Credit card statement ready (generic structure),train,2026-08-03
+syn_finance_creditcard_0003,Finance,credit_card,note,synthetic_llm,New purchase alert (generic structure),val,2026-08-03
+syn_finance_creditcard_0004,Finance,credit_card,finance_obligation,synthetic_llm,Overdue payment notice (generic structure),train,2026-08-03
+syn_finance_creditcard_0005,Finance,credit_card,finance_obligation,synthetic_llm,Annual fee renewal notice (generic structure),train,2026-08-03
+syn_finance_mortgage_0001,Finance,mortgage,finance_obligation,synthetic_llm,Mortgage payment reminder (generic structure),train,2026-08-03
+syn_finance_mortgage_0002,Finance,mortgage,finance_obligation,synthetic_llm,Mortgage renewal notice (generic structure),test,2026-08-03
+syn_finance_mortgage_0003,Finance,mortgage,note,synthetic_llm,Mortgage statement ready notification (generic structure),train,2026-08-03
+syn_finance_tax_0001,Finance,tax,finance_obligation,synthetic_llm,CRA Notice of Assessment (structure only),train,2026-08-03
+syn_finance_tax_0002,Finance,tax,finance_obligation,synthetic_llm,Municipal Property Tax Bill (structure only),test,2026-08-03
+syn_finance_tax_0003,Finance,tax,finance_obligation,synthetic_llm,CRA GST/HST credit notice (structure only),train,2026-08-03
+syn_finance_tax_0004,Finance,tax,finance_obligation,synthetic_llm,CRA tax instalment reminder (structure only),train,2026-08-03
+syn_finance_tax_0005,Finance,tax,finance_obligation,synthetic_llm,"Municipal property tax bill, second installment (structure only)",train,2026-08-03
+syn_finance_tax_0006,Finance,tax,note,synthetic_llm,CRA My Account mail notification (structure only),train,2026-08-03
+syn_finance_tax_0007,Finance,tax,finance_obligation,synthetic_llm,Municipal final property tax bill (structure only),val,2026-08-03
+syn_finance_tax_0008,Finance,tax,finance_obligation,synthetic_llm,"CRA Notice of Assessment, refund case (structure only)",train,2026-08-03
+syn_finance_tax_0009,Finance,tax,finance_obligation,synthetic_llm,Municipal property tax eBilling notice (structure only),train,2026-08-03
+syn_finance_tax_0010,Finance,tax,finance_obligation,synthetic_llm,CRA balance owing reminder (structure only),test,2026-08-03
+syn_health_medical_0001,Health,medical,schedule,synthetic_llm,Dental/medical clinic appointment reminder (generic structure),val,2026-08-03
+syn_health_medical_0002,Health,medical,schedule,synthetic_llm,Hospital lab test appointment reminder (structure only),train,2026-08-03
+syn_health_medical_0003,Health,medical,finance_obligation,synthetic_llm,Hospital invoice for uninsured service (structure only),train,2026-08-03
+syn_health_medical_0004,Health,medical,note,synthetic_llm,Health insurance claim processed notification (generic structure),train,2026-08-03
+syn_health_medical_0005,Health,medical,schedule,synthetic_llm,Prescription renewal reminder (generic structure),train,2026-08-03
+syn_home_childcare_0001,Home & Family,childcare,finance_obligation,synthetic_llm,Daycare monthly fee invoice (generic structure),val,2026-08-03
+syn_home_childcare_0002,Home & Family,childcare,finance_obligation,synthetic_llm,Extracurricular activity registration fee (generic structure),test,2026-08-03
+syn_home_childcare_0003,Home & Family,childcare,note,synthetic_llm,"Camp registration confirmation, no balance owing (generic structure)",train,2026-08-03
+syn_home_phone_0001,Home & Family,phone,finance_obligation,synthetic_llm,Mobile phone bill ready notice (generic structure),train,2026-08-03
+syn_home_phone_0002,Home & Family,phone,note,synthetic_llm,Pre-authorized payment enrollment confirmation (generic structure),train,2026-08-03
+syn_home_phone_0003,Home & Family,phone,finance_obligation,synthetic_llm,Prepaid plan extra usage charge notice (generic structure),train,2026-08-03
+syn_home_rentproperty_0001,Home & Family,rent_property,finance_obligation,synthetic_llm,Rent payment reminder (generic structure),train,2026-08-03
+syn_home_rentproperty_0002,Home & Family,rent_property,note,synthetic_llm,Property assessment notice (structure only),test,2026-08-03
+syn_home_rentproperty_0003,Home & Family,rent_property,finance_obligation,synthetic_llm,Condo fee payment notice (generic structure),train,2026-08-03
+syn_home_utilities_0001,Home & Family,utilities,finance_obligation,synthetic_llm,Electricity utility bill (generic structure),train,2026-08-03
+syn_home_utilities_0002,Home & Family,utilities,finance_obligation,synthetic_llm,Internet/telecom bill (generic structure),train,2026-08-03
+syn_home_utilities_0003,Home & Family,utilities,finance_obligation,synthetic_llm,Water utility bill (generic structure),val,2026-08-03
+syn_home_utilities_0004,Home & Family,utilities,note,synthetic_llm,Electricity meter information notice (generic structure),train,2026-08-03
+syn_home_utilities_0005,Home & Family,utilities,finance_obligation,synthetic_llm,Gas utility bill (generic structure),train,2026-08-03
+syn_home_utilities_0006,Home & Family,utilities,note,synthetic_llm,Cloud storage account billing update (generic structure),test,2026-08-03
+syn_notes_0001,Notes,uncategorized,note,synthetic_llm,,train,2026-08-03
+syn_notes_0002,Notes,uncategorized,note,synthetic_llm,,train,2026-08-03
+syn_notes_0003,Notes,uncategorized,note,synthetic_llm,,test,2026-08-03
+syn_notes_0004,Notes,uncategorized,note,synthetic_llm,,val,2026-08-03
+syn_notes_0005,Notes,uncategorized,note,synthetic_llm,,train,2026-08-03
+syn_notes_0006,Notes,uncategorized,note,synthetic_llm,,train,2026-08-03
+syn_notes_0007,Notes,uncategorized,note,synthetic_llm,,train,2026-08-03
+syn_notes_0008,Notes,uncategorized,note,synthetic_llm,,test,2026-08-03
+syn_notes_0009,Notes,uncategorized,note,synthetic_llm,,train,2026-08-03
+syn_pg_subscription_0001,Personal Growth,subscription_personal,note,synthetic_llm,Streaming service payment receipt (generic structure),val,2026-08-03
+syn_pg_subscription_0002,Personal Growth,subscription_personal,note,synthetic_llm,Gym membership payment receipt (generic structure),train,2026-08-03
+syn_pg_subscription_0003,Personal Growth,subscription_personal,note,synthetic_llm,Music streaming service receipt (generic structure),train,2026-08-03
+syn_pg_subscription_0004,Personal Growth,subscription_personal,note,synthetic_llm,Professional networking event registration confirmation (generic structure),train,2026-08-03
+syn_pg_subscription_0005,Personal Growth,subscription_personal,finance_obligation,synthetic_llm,Online course payment reminder (generic structure),train,2026-08-03
+syn_work_businesstax_0001,Work & Business,business_tax,finance_obligation,synthetic_llm,Corporate HST remittance reminder (structure only),val,2026-08-03
+syn_work_businesstax_0002,Work & Business,business_tax,note,synthetic_llm,Corporate tax filing confirmation (structure only),train,2026-08-03
+syn_work_businesstax_0003,Work & Business,business_tax,finance_obligation,synthetic_llm,Payroll remittance (PD7A) reminder (structure only),train,2026-08-03
+syn_work_contractinvoice_0001,Work & Business,contract_invoice,finance_obligation,synthetic_llm,Supplier invoice due (generic structure),train,2026-08-03
+syn_work_contractinvoice_0002,Work & Business,contract_invoice,note,synthetic_llm,Purchase order confirmation (generic structure),train,2026-08-03
+syn_work_contractinvoice_0003,Work & Business,contract_invoice,finance_obligation,synthetic_llm,Overdue supplier invoice notice (generic structure),train,2026-08-03
+syn_work_payroll_0001,Work & Business,payroll,note,synthetic_llm,T4 slip availability notification (generic structure),train,2026-08-03
+syn_work_payroll_0002,Work & Business,payroll,note,synthetic_llm,Pay statement ready notification (generic structure),test,2026-08-03
+syn_work_payroll_0003,Work & Business,payroll,note,synthetic_llm,Benefits enrollment reminder (generic structure),train,2026-08-03
+syn_work_payroll_0004,Work & Business,payroll,finance_obligation,synthetic_llm,WSIB premium payment notice (structure only),val,2026-08-03
+syn_work_payroll_0005,Work & Business,payroll,note,synthetic_llm,Paystub changed/updated notification (generic structure),test,2026-08-03
+syn_work_subscriptionbiz_0001,Work & Business,subscription_biz,finance_obligation,synthetic_llm,Business software subscription renewal (generic structure),train,2026-08-03
+syn_work_subscriptionbiz_0002,Work & Business,subscription_biz,finance_obligation,synthetic_llm,Accounting software payment failed notice (generic structure),test,2026-08-03
+syn_work_subscriptionbiz_0003,Work & Business,subscription_biz,note,synthetic_llm,Cloud storage plan upgrade confirmation (generic structure),train,2026-08-03
+syn_work_subscriptionbiz_0004,Work & Business,subscription_biz,finance_obligation,synthetic_llm,Business billing account past due notice (generic structure),train,2026-08-03

@@ -7,8 +7,8 @@
 | Courses | AASD 4016 — Full Stack Data Science Systems (individual); AASD 4017 — Presenting Data Science-driven Solutions (group) |
 | Institution | George Brown College, Applied A.I. Solutions Development |
 | Author / Project Lead | Andy Phan |
-| Status | Draft v1.0 |
-| Date | 2026-08-03 |
+| Status | Draft v1.1 |
+| Date | 2026-08-04 (v1.1 — architecture expanded to 9 layers + real-mailbox validation findings, see §3, §9.1) |
 
 ---
 
@@ -96,25 +96,69 @@ output, surfaced through a lightweight dashboard.
 
 ---
 
-## 3. System Architecture — Multi-Stage Classification Pipeline
+## 3. System Architecture — Layered Pipeline
 
-The problem is **not** a single classification task. It is decomposed into six
-stages, only two of which require trained deep learning models; the rest are
-metadata reads or deterministic rules.
+The problem is **not** a single classification task. It is decomposed into nine
+layers, only two of which require trained deep learning models; the rest are
+metadata reads, deterministic rules, or statistical aggregation. Layers execute
+in order for each email; Layer 2 additionally runs as a one-time/periodic bulk
+pass across the whole mailbox to bootstrap Layer 3.
 
-| Stage | Task | Problem type | Model required? |
+| Layer | Task | Problem type | Model required? |
 |---|---|---|---|
-| 1 | Spam / trash filtering | Binary (gate) | No — reuse Gmail API `labelIds` |
-| 2 | Attachment / metadata detection | Metadata read | No |
-| 3 | **Domain classification** | Multi-class (7 domains + fallback "Notes") | **Yes — primary DL component** |
-| 3b | Personal vs. Business Finance | Binary | No — rule/registry lookup |
-| 4 | Event type (finance_obligation / schedule / note) | Multi-class (derived) | No — rule over Stage 5 output |
-| 5 | **Entity extraction**: amount, due date, sender/vendor | Sequence labeling (NER) | **Yes — primary DL component** |
-| 6 | Confidence-gated action policy | Threshold policy | No — fixed thresholds (§4, FR-08) |
+| 0 | Ingest — pull message metadata via Gmail API | Data read | No |
+| 1 | Spam / Trash gate | Binary (gate) | No — reuse Gmail API `labelIds` |
+| 2 | **Mailbox-wide statistical audit** (frequency, reciprocity, reply rate, recency per sender) | Aggregation/statistics | No — informs Layer 3 registry suggestions and surfaces an Inbox Health Report to the user |
+| 3 | Sender Registry lookup (user-curated, auto-suggested by Layer 2) | Rule (lookup) | No — high-confidence fast path; skips Layer 5 on a hit |
+| 4 | Attachment text extraction (native PDF text first; OCR fallback for image-only attachments) | Rule + best-effort OCR | No — see §3.1 for the OCR precision caveat |
+| 5 | **Domain classification** (only runs on a Layer 3 miss) | Multi-class (7 domains + fallback "Notes") | **Yes — primary DL component** |
+| 5b | Personal vs. Business Finance (only when domain = Finance) | Binary | No — rule/registry lookup |
+| 6 | **Entity extraction**: amount, due date, sender/vendor | Sequence labeling (NER) | **Yes — primary DL component** |
+| 7 | Event type (finance_obligation / schedule / note) | Multi-class (derived) | No — rule over Layer 6 output |
+| 8 | Confidence-gated action policy | Threshold policy | No — fixed thresholds (§4, FR-08); includes a high-stakes keyword override (§3.1) that bypasses frequency-based filtering entirely |
 
-Domain taxonomy (Stage 3): Finance, Administration, Education, Work & Business,
+Domain taxonomy (Layer 5): Finance, Administration, Education, Work & Business,
 Home & Family, Health, Personal Growth, plus a "Notes" fallback bucket for
-low-confidence or unclassifiable items.
+low-confidence or unclassifiable items. Sub-domain vocabulary (non-exhaustive,
+extended during real-mailbox testing — see §9.1): Finance{tax, banking,
+credit_card, mortgage, receipts}, Administration{insurance, immigration,
+vehicle_dmv, civic}, Education{school, student_loan, children_school},
+Work & Business{payroll, subscription_biz, business_tax, contract_invoice},
+Home & Family{utilities, phone, rent_property, childcare}, Health{medical},
+Personal Growth{subscription_personal}.
+
+### 3.1 Design Rationale — Why Layered, Not a Single Model
+
+Three findings from real-mailbox testing (§9.1) drove this layering, and should
+guide implementation priority:
+
+1. **Frequency-based signals (Layer 2) cannot detect rare-but-critical content
+   by construction.** A one-time immigration/work-permit email has, by
+   definition, low frequency and no sender history — any purely statistical
+   "importance" ranking will systematically miss it. Layer 8's confidence
+   gate therefore includes a **high-stakes keyword override**: a curated term
+   list for asymmetric-cost domains (Administration/immigration,
+   Administration/legal) that forces a message into human review regardless
+   of sender frequency, reciprocity, or registry status. Cost of a false
+   positive here (user glances at an unimportant email) is near zero; cost of
+   a false negative (a missed work-permit deadline) is severe — the threshold
+   is intentionally asymmetric.
+2. **A small generic pretrained NER model is not automatically more accurate
+   than a targeted rule.** spaCy `en_core_web_sm` was tested against real
+   email bodies for MONEY-entity detection and produced a ~61% false-positive
+   rate (e.g., tagging "2 annotations" as currency) while also missing the
+   real compact currency format used in this mailbox (`CA$31.64`, no space).
+   A narrow regex tuned to the actual format outperformed the generic model
+   for this specific, well-defined sub-task. Lesson: prefer the simplest
+   reliable tool for each narrow decision; reserve the trained/fine-tuned
+   model (Layer 5/6) for genuinely open-ended content understanding it is
+   suited for.
+3. **Automated pipelines still need a human spot-check step.** A cleanup
+   script (§9.1) silently left one message mislabeled after a mid-run network
+   hiccup with no per-item error handling — caught only because the user
+   manually reviewed the Gmail UI afterward. FR-10's human-in-the-loop
+   requirement is not just for low-confidence extractions; it also functions
+   as QA on the automated layers themselves.
 
 ---
 
@@ -129,9 +173,13 @@ low-confidence or unclassifiable items.
 | FR-05 | The system SHALL extract, where present, the monetary amount, due date, and sender/vendor name from the email body using a fine-tuned NER model. |
 | FR-06 | The system SHALL derive the event type (finance_obligation, schedule, or note) from the presence/absence of extracted amount and due-date entities, not from a separately trained classifier. |
 | FR-07 | The system SHALL expose extraction results via a REST API endpoint. |
-| FR-08 | The system SHALL apply a confidence-gated policy: auto-apply when confidence ≥ 0.85, request user confirmation when 0.65 ≤ confidence < 0.85, and defer to Notes for manual review when confidence < 0.65. |
+| FR-08 | The system SHALL apply a confidence-gated policy: auto-apply when confidence ≥ 0.85, request user confirmation when 0.65 ≤ confidence < 0.85, and defer to Notes for manual review when confidence < 0.65 — except where FR-13 applies. |
 | FR-09 | The system SHALL present results and summary statistics through a dashboard (expense-by-month chart, extracted entity table). |
-| FR-10 | The system SHALL allow a human reviewer to correct or confirm low-confidence extractions. |
+| FR-10 | The system SHALL allow a human reviewer to correct or confirm low-confidence extractions, and to audit/override any automated label or archive action. |
+| FR-11 | The system SHALL maintain a user-curated Sender Registry (sender domain/address → domain/sub-domain) and SHALL bypass Layer 5 domain classification on a registry hit. |
+| FR-12 | The system SHALL run a mailbox-wide statistical audit (Layer 2) computing, per sender: message frequency, % of mailbox volume, reciprocity (has the user ever sent to this sender), reply rate, and recency — and SHALL use the ranked output to auto-suggest Sender Registry entries. |
+| FR-13 | The system SHALL maintain a high-stakes keyword override list (initially: Administration/immigration, Administration/legal) that routes any matching message to human review regardless of sender frequency, registry status, or confidence score. |
+| FR-14 | The system SHALL extract text from email attachments where present: native text layer first (e.g., PDF), OCR as best-effort fallback for image-only attachments — OCR-derived text SHALL be tagged with lower confidence than natively-extracted text. |
 
 ---
 
@@ -157,7 +205,7 @@ low-confidence or unclassifiable items.
 ### 5.2 Data Sources
 | Source | Role | Status |
 |---|---|---|
-| Synthetic data (LLM-generated) | Primary training/eval set | To be generated |
+| Synthetic data (LLM-generated) | Primary training/eval set | 114 rows generated across 8 domains, split 70/15/15 (see `dataset/`) — pilot batch; scale-up pending |
 | `invoice-extraction-dataset-v2` (HuggingFace) | Reference format only — content quality assessed as unreliable (incoherent vendor/item pairing) | Reviewed, not used as content source |
 | Enron email corpus (`emails.csv`) | Negative-class examples (non-financial, non-deadline email), after keyword filtering | Downloaded, not yet filtered |
 | CommonForms (HuggingFace) | Structural reference for Administration-domain documents | Identified, not yet used |
@@ -233,15 +281,79 @@ fully redacted (text-layer removal, not visual overlay) before being referenced.
 |---|---|
 | Synthetic-only training data may not generalize to real-world email formatting | Use Enron corpus for structural/negative-example diversity; document limitation in DATASET_CARD.md |
 | No reliable public dataset for Insurance/Immigration sub-domains | Rely primarily on synthetic generation for these sub-domains; flag as a known coverage gap |
-| 3-week timeline constrains scope | Only Stage 3 (domain) and Stage 5 (NER) are trained models; all other stages are rule-based by design (§3) |
+| 3-week timeline constrains scope | Only Layer 5 (domain) and Layer 6 (NER) are trained models; all other layers are rule-based by design (§3) |
+| Small pretrained NER models can be unreliable on real formats (§9.1) | Verify each pretrained component against real samples before trusting it; prefer a targeted regex/rule over a generic model for narrow, well-defined sub-tasks |
+| Automated cleanup/label scripts can silently mis-process individual items on transient errors (§9.1) | Every bulk-modify script defaults to dry-run; human spot-check remains part of the workflow, not optional (FR-10) |
+
+### 9.1 Real-World Validation Findings (2026-08-04)
+
+With the Project Lead's own Gmail account connected under OAuth (readonly, then
+upgraded to modify scope with explicit re-consent), Layers 0–3 and the Layer 8
+confidence-gate concept were exercised against ~300–1000 real messages to
+pressure-test the design in §3 before committing further engineering time.
+Findings, most significant first:
+
+1. **Frequency ≠ importance, confirmed with real numbers.** Top-volume senders
+   (GitHub 27%, Atlassian/Jira 12.7%, Vercel 4.7%) were 100% non-financial
+   developer-tool notifications. Genuinely critical low-frequency items
+   (a family member's forwarded report card, a forwarded work-permit offer,
+   forwarded case files from immigration clients) had a message count of 1–2
+   and were completely invisible to a pure volume-ranked view. This is the
+   direct empirical justification for FR-13 (§3.1, finding 1).
+2. **Rule-based classification (sender domain + keyword) reached ~96% net
+   precision after two rounds of self-verification, but neither round was
+   free of errors on the first pass.** Round 1 (grouping ~315 messages as
+   "noise" by sender domain alone) initially looked risky; a full re-check
+   using a targeted regex found 0 real currency amounts among them (315/315
+   confirmed correctly excluded). Round 2 (grouping 14 messages as
+   Work & Business billing via `sender + keyword-in-body` search) had **5/14
+   false positives** — marketing emails that merely mentioned the word
+   "billing" in passing (e.g., "manage your billing settings", "without
+   touching billing directly") rather than being an actual invoice. This is
+   the empirical basis for §3.1, finding 2: keyword-only matching is
+   insufficient without a currency-pattern confirmation step.
+3. **A generic small pretrained NER model performed worse than a targeted
+   regex for this task.** See §3.1, finding 2 for the specific comparison
+   (spaCy `en_core_web_sm`: ~61% false-positive rate and missed the real
+   `CA$X.XX` format entirely).
+4. **Gmail's own pretrained signals are a usable free input.** `labelIds`
+   already carries Google's own importance/category model output
+   (`IMPORTANT`, `CATEGORY_PERSONAL`, `CATEGORY_UPDATES`, etc.) — cross-checked
+   against the high-stakes keyword override (finding 1) and found consistent
+   (Google had already flagged the same immigration-related messages
+   `IMPORTANT`, though not surfaced to the user in any actionable way).
+   Recommend consuming these labels as an additional free feature in Layer 5
+   rather than re-deriving importance from scratch.
+5. **One residual labeling error survived both automated checks** — a single
+   message kept an incorrect label after a mid-run network error in the
+   cleanup script produced no visible failure. Found only via manual user
+   review of the Gmail UI. Reinforces FR-10 as applying to pipeline QA, not
+   only to low-confidence model output.
+
+**Action items carried into backlog:** upgrade Layer 2's statistics to include
+read/unread ratio, thread-level (not domain-level) reciprocity, and response
+time per NFR/FR to be added in a future revision; expand the high-stakes
+keyword list beyond immigration/legal as new categories are identified.
 
 ---
 
 ## 10. Out of Scope
-- Integration with any pre-existing production system or real user email account.
-- Voice, image, or social-media input channels (email only).
+- Integration with any pre-existing production system. (Operational validation
+  against the Project Lead's own personal Gmail account, under explicit OAuth
+  consent, is in scope as end-to-end testing — see §9.1 — and is distinct from
+  the training-data privacy constraint in §5.5, which governs what may appear
+  in the dataset/repository, not what the deployed pipeline is tested against.)
+- Voice or social-media input channels (email only). Image/PDF **attachments**
+  within an email are in scope for best-effort text extraction (FR-14; native
+  text preferred, OCR as fallback with lower confidence) — this is narrower
+  than a general image-understanding channel.
 - Automated subscription cancellation or financial transactions.
-- Health-domain extraction (excluded due to lack of representative data).
+- Mutating a user's mailbox beyond labeling/archiving (FR-11–FR-14): the
+  system SHALL NOT permanently delete email; deletion, if ever offered, is an
+  explicit opt-in user action, never automatic (§9.1 design rationale).
+- Deep Health-domain extraction beyond the high-stakes keyword override
+  (FR-13) — full Health-domain NER excluded due to lack of representative
+  training data.
 
 ---
 

@@ -1,0 +1,24 @@
+{
+  "id": "syn_admin_immigration_0001",
+  "domain": "Administration",
+  "sub_domain": "immigration",
+  "event_type": "note",
+  "source_type": "synthetic_llm",
+  "based_on_template": "IRCC secure account status update email (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Immigration, Refugees and Citizenship Canada <donotreply@cic.gc.ca>\nSubject: An update has been made to your application\n\nHello,\n\nThere has been an update to your application in your IRCC secure account. Please sign in to view the details.\n\nThis is an automated message, please do not reply.\n\nIRCC",
+  "output": {
+    "doc_type": "ircc_status_update",
+    "issuer": "Immigration, Refugees and Citizenship Canada",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-02-20",
+    "due_date": null,
+    "amounts": [],
+    "reference_number": null,
+    "special_note": "Status update only, no amount or deadline specified - requires manual login to review.",
+    "domain": "Administration"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "syn_edu_school_0001",
+  "domain": "Education",
+  "sub_domain": "school",
+  "event_type": "schedule",
+  "source_type": "synthetic_llm",
+  "based_on_template": "School parent-teacher meeting invite (generic structure)",
+  "generated_by": "claude-sonnet-5",
+  "prompt_version": "v1",
+  "created_date": "2026-08-03",
+  "split": null,
+  "input": "From: Maple Ridge Public School <office@mapleridge.yrdsb.ca>\nSubject: Parent-Teacher Interview - Book Your Time\n\nDear Parent/Guardian,\n\nParent-Teacher interviews are scheduled for Thursday, November 13, 2026, from 4:00 PM to 7:00 PM. Please book a 10-minute slot through the school portal.\n\nMaple Ridge Public School",
+  "output": {
+    "doc_type": "school_event_invite",
+    "issuer": "Maple Ridge Public School",
+    "recipient_name": "Jordan Lee",
+    "issue_date": "2026-11-02",
+    "due_date": "2026-11-13",
+    "amounts": [],
+    "reference_number": null,
+    "special_note": "Book a 10-minute slot in advance through the school portal.",
+    "domain": "Education"
+  }
+}
